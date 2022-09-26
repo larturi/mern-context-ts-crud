@@ -6,7 +6,7 @@
     "declaration": true,
     "outDir": "dist",
     "sourceMap": true,
-    "esModuleInterop": true,
+    "moduleResolution": "Node16"
   },
   "include": ["server/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
