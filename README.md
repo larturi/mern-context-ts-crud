@@ -16,7 +16,7 @@ docker-compose up -d
 4. Ejecutar el servidor
 
 ```bash
-tsc
+tsc --watch
 ```
 
 ```bash
