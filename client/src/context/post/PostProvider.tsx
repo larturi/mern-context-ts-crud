@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useEffect, useReducer } from 'react';
-import { getPostsApi } from '../../api/post';
+import { FC, useEffect, useReducer, useState } from 'react';
+import { getPostsApi, createPostApi } from '../../api/post';
 import { IPost } from '../../interfaces/post';
 import { PostContext, postReducer } from './';
 
@@ -26,6 +26,15 @@ export const PostProvider: FC<Props> = ({ children }) => {
       dispatch({ type: 'GET_POSTS', payload: posts });
    };
 
+   const createPost = async (post: IPost) => {
+      const res = await createPostApi(post);
+      dispatch({ type: 'CREATE_POST', payload: [...state.posts, res] });
+   };
+
+   useEffect(() => {
+      getPosts();
+    }, [])
+
    return (
       <PostContext.Provider
          value={{
@@ -33,6 +42,7 @@ export const PostProvider: FC<Props> = ({ children }) => {
 
             // Mehtods
             getPosts,
+            createPost,
          }}
       >
          {children}

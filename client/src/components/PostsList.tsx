@@ -10,7 +10,9 @@ export const PostsList: FC<Props> = ({ posts }) => {
         <div>
             {
                 posts.map((post) => (
-                    <p key={post.title}>{post.title}</p>
+                    <p key={post._id} className='text-white text-2xl'>
+                        {post.title}
+                    </p>
                 ))
             }
         </div>
