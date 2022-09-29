@@ -1,13 +1,32 @@
-import { useContext } from 'react';
-import { postContext } from '../context/postContext';
+import React, { useContext, useEffect } from 'react';
+import { PostsList } from '../components/PostsList';
+import { PostContext } from '../context/post';
 
-export function HomePage() {
+export const HomePage = () => {
 
-  const { posts, setPosts } = useContext(postContext);
+  const { posts, getPosts, isLoaded } = useContext(PostContext);
 
-  console.log(posts)
+  useEffect(() => {
+    getPosts();
+  }, [])
 
+  if(!isLoaded) return null;
+  
   return (
-    <div>HomePage</div>
+    <>
+      <h2>HomePage</h2>
+     
+      {
+        !isLoaded ? (
+          <p>Loading...</p>
+        ) : (
+          <PostsList posts={posts} />
+        )
+      }
+    
+    </>
   )
 }
+
+export default HomePage;
+

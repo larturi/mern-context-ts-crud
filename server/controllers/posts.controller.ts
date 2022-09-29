@@ -6,8 +6,8 @@ import { processError } from '../helpers/validations.js';
 import { uploadImage, deleteImage } from '../libs/cloudinary.js'
 
 export const getPosts = async (req: Request, res: Response) => {
-    const posts = await Post.find()
-    res.json({ posts })
+    const posts = await Post.find();
+    res.json({ posts });
 };
 
 export const createPost = async (req: Request, res: Response) => {
