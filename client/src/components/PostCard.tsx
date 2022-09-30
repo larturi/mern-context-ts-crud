@@ -49,7 +49,7 @@ export const PostsCard: FC<Props> = ({ post }) => {
             className='bg-zinc-800 text-white rounded-sm shadow-md
                        shadow-black'
         >
-            <div className='px-4 py-7'>
+            <div className='lg:px-4 lg:py-7 px-3 py-5 mb-3'>
                 <div className='flex justify-between'>
                     <h3 
                         className='font-bold text-2xl hover:text-gray-300 hover:cursor-pointer'

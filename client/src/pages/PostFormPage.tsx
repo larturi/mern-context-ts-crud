@@ -44,7 +44,7 @@ export function PostFormPage() {
          >
             {({ handleSubmit }) => (
                <div className='flex justify-center'>
-                  <div className='bg-zinc-800 p-10 shadow-md shadow-black w-2/6'>
+                  <div className='bg-zinc-800 p-10 shadow-md shadow-black lg:w-2/6'>
                      <Form onSubmit={handleSubmit}>
                         <header className='flex justify-between items-center py-4 text-white'>
                            <h1 className='text-white text-3xl text-left mb-1'>

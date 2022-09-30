@@ -7,7 +7,7 @@ interface Props {
 
 export const PostsList: FC<Props> = ({ posts }) => {
     return (
-        <div className='mt-4 grid grid-cols-3 gap-2'>
+        <div className='lg:mt-4 lg:grid lg:grid-cols-3 lg:gap-2'>
             {
                 posts.map((post) => (
                     <PostsCard 
