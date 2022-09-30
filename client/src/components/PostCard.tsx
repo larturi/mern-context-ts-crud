@@ -1,4 +1,5 @@
-import React, { FC, useContext } from 'react';
+import { FC, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { PostContext } from '../context/post';
 import { IPost } from '../interfaces/post';
@@ -10,6 +11,7 @@ interface Props {
 export const PostsCard: FC<Props> = ({ post }) => {
 
     const { deletePost } = useContext(PostContext);
+    const navigate = useNavigate();
 
     const handleDelete = (id: string) => {
         toast((t) => (
@@ -45,14 +47,20 @@ export const PostsCard: FC<Props> = ({ post }) => {
     return (
         <div 
             className='bg-zinc-800 text-white rounded-sm shadow-md
-                 shadow-black hover:bg-zinc-700 hover:cursor-pointer'
+                       shadow-black'
         >
             <div className='px-4 py-7'>
                 <div className='flex justify-between'>
-                    <h3 className='font-bold text-2xl'>{post.title}</h3>
+                    <h3 
+                        className='font-bold text-2xl hover:text-gray-300 hover:cursor-pointer'
+                        onClick={() => navigate(`/posts/${post._id}`)}
+                    >
+                        {post.title}
+                    </h3>
                     <button 
                         className='bg-red-600 text-sm px-2 py-1 rounded-sm'
                         onClick={() => handleDelete(post._id!)}
+                        style={{zIndex:10}}
                     >
                             Eliminar
                         </button>

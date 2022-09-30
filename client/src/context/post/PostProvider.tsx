@@ -1,16 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect, useReducer } from 'react';
-import { getPostsApi, createPostApi, deletePostApi } from '../../api/post';
+import {
+    getPostsApi, 
+    getPostApi, 
+    createPostApi, 
+    updatePostApi, 
+    deletePostApi 
+} from '../../api/post';
 import { IPost } from '../../interfaces/post';
 import { PostContext, postReducer } from './';
 
 export interface PostState {
     posts: IPost[],
+    post?: IPost,
     isLoaded: boolean
 }
 
 const POST_INITIAL_STATE: PostState = {
    posts: [],
+   post: undefined,
    isLoaded: false,
 };
 
@@ -26,9 +34,22 @@ export const PostProvider: FC<Props> = ({ children }) => {
       dispatch({ type: 'GET_POSTS', payload: posts });
    };
 
+   const getPost = async (idPost: string) => {
+      const post: IPost = await getPostApi(idPost);
+      dispatch({ type: 'GET_POST', payload: post });
+   };
+
    const createPost = async (post: IPost) => {
       const res = await createPostApi(post);
       dispatch({ type: 'CREATE_POST', payload: [...state.posts, res] });
+   };
+
+   const updatePost = async (idPost: string, post: IPost) => {
+      const res = await updatePostApi(idPost, post);
+      dispatch({ 
+         type: 'UPDATE_POST', 
+         payload: state.posts.map(post => post._id === idPost ? res : post)
+      });
    };
 
    const deletePost = async (idPost: string) => {
@@ -50,7 +71,9 @@ export const PostProvider: FC<Props> = ({ children }) => {
 
             // Mehtods
             getPosts,
+            getPost,
             createPost,
+            updatePost,
             deletePost,
          }}
       >
