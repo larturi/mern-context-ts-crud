@@ -8,6 +8,7 @@ interface ContextProps {
     // Mehtods
     getPosts: () => Promise<IPost[]> | Promise<void>;
     createPost: (post: IPost) => Promise<IPost> | Promise<void>;
+    deletePost: (idPost: string) => Promise<IPost> | Promise<void>;
 }
 
 export const PostContext = createContext<ContextProps>({} as ContextProps);

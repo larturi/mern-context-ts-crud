@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useEffect, useReducer, useState } from 'react';
-import { getPostsApi, createPostApi } from '../../api/post';
+import { FC, useEffect, useReducer } from 'react';
+import { getPostsApi, createPostApi, deletePostApi } from '../../api/post';
 import { IPost } from '../../interfaces/post';
 import { PostContext, postReducer } from './';
 
@@ -31,6 +31,14 @@ export const PostProvider: FC<Props> = ({ children }) => {
       dispatch({ type: 'CREATE_POST', payload: [...state.posts, res] });
    };
 
+   const deletePost = async (idPost: string) => {
+      const res = await deletePostApi(idPost);
+      dispatch({ 
+         type: 'DELETE_POST', 
+         payload: state.posts.filter(post => post._id !== idPost)
+      });
+   };
+
    useEffect(() => {
       getPosts();
     }, [])
@@ -43,6 +51,7 @@ export const PostProvider: FC<Props> = ({ children }) => {
             // Mehtods
             getPosts,
             createPost,
+            deletePost,
          }}
       >
          {children}

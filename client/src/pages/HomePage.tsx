@@ -19,16 +19,20 @@ export const HomePage = () => {
   
   return (
     <>
-      <h2>HomePage</h2>
-     
+      <div className='flex flex-row justify-between mb-4'>
+        <h2 className='text-white text-3xl'>Listado de Posts</h2>
+
+        <Link 
+            to="/new" 
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+              Crear Post
+        </Link>
+      </div>     
       {
         !isLoaded ? (
           <p>Loading...</p>
         ) : (
-          <>
-            <Link to="/new">Crear nueva publicación</Link>
-            <PostsList posts={posts} />
-          </>
+          <PostsList posts={posts} />
         )
       }
     

@@ -12,3 +12,9 @@ export const createPostApi = async (newPost: IPost) => {
     const post: IPost = response.data;
     return post;
 };
+
+export const deletePostApi = async (idPost: string) => {
+    const response = await axios.delete(`${import.meta.env.VITE_SERVER_BACKEND_URL}/posts/${idPost}`);
+    const post: IPost = response.data;
+    return post;
+};
