@@ -47,9 +47,10 @@ export const PostsCard: FC<Props> = ({ post }) => {
     return (
         <div 
             className='bg-zinc-800 text-white rounded-sm shadow-md
-                       shadow-black'
+                       shadow-black hover:cursor-pointer hover:bg-zinc-700'
+            onClick={() => navigate(`/posts/${post._id}`)}
         >
-            <div className='lg:px-4 lg:py-7 px-3 py-5 mb-3'>
+            <div className='lg:px-4 lg:py-7 px-3 py-5 mb-1'>
                 <div className='flex justify-between'>
                     <h3 
                         className='font-bold text-2xl hover:text-gray-300 hover:cursor-pointer'
@@ -59,7 +60,10 @@ export const PostsCard: FC<Props> = ({ post }) => {
                     </h3>
                     <button 
                         className='bg-red-600 text-sm px-2 py-1 rounded-sm'
-                        onClick={() => handleDelete(post._id!)}
+                        onClick={(e) => {
+                            e.stopPropagation(); 
+                            handleDelete(post._id!);
+                        }}
                         style={{zIndex:10}}
                     >
                             Eliminar
@@ -68,6 +72,15 @@ export const PostsCard: FC<Props> = ({ post }) => {
 
                 <p className='mt-5 text-gray-300'>{post.description}</p>
             </div>
+            {
+                post.image && (
+                    <img 
+                        className='w-full' 
+                        style={{maxHeight: '240px', minHeight: '240px'}} 
+                        src={post.image.url} 
+                    />
+                )
+            }
         </div>
     )
 }

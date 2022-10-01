@@ -14,7 +14,15 @@ export const getPostApi = async (idPost: string) => {
 };
 
 export const createPostApi = async (newPost: IPost) => {
-    const response = await axios.post(`${import.meta.env.VITE_SERVER_BACKEND_URL}/posts`, newPost);
+    const form = new FormData();
+
+    form.append('title', newPost.title);
+    form.append('description', newPost.description);
+    form.append('image', newPost.image!);
+
+    const response = await axios.post(`${import.meta.env.VITE_SERVER_BACKEND_URL}/posts`, form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    });
     const post: IPost = response.data;
     return post;
 };

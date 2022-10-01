@@ -40,8 +40,12 @@ export const PostProvider: FC<Props> = ({ children }) => {
    };
 
    const createPost = async (post: IPost) => {
-      const res = await createPostApi(post);
-      dispatch({ type: 'CREATE_POST', payload: [...state.posts, res] });
+      try {
+         const res = await createPostApi(post);
+         dispatch({ type: 'CREATE_POST', payload: [...state.posts, res] });
+      } catch (error) {
+         console.error(error);
+      }
    };
 
    const updatePost = async (idPost: string, post: IPost) => {

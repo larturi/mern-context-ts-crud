@@ -46,6 +46,7 @@ export const postReducer = (state: PostState, action: PostActionType): PostState
             return {
                ...state,
                isLoaded: true,
+               post: undefined,
                posts: [ ...action.payload ]
             };
 
